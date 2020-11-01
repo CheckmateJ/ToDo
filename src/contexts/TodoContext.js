@@ -1,15 +1,17 @@
 import React, { Component } from 'react'
+import DayPickerInput from "react-day-picker/DayPickerInput";
 import TodoList from '../components/TodoList';
 
 
 class TodoContext extends Component {
   constructor(props){
     super(props);
-    this.state = {tasks: [], text: '', name: "Todo List:"};
+    this.state = {tasks: [], text: '', name: "Todo List:", date: []};
     this.handleSubmit = this.handleSubmit.bind(this);
     this.handleChange = this.handleChange.bind(this);
     this.handleDelete = this.handleDelete.bind(this);
     this.setUpdate = this.setUpdate.bind(this);
+    this.dateChange = this.dateChange.bind(this);
   }
 
 
@@ -28,6 +30,7 @@ class TodoContext extends Component {
     }
     const newTask = { 
       text: this.state.text,
+      date: this.state.date,
       id: Date.now()
     };
     this.setState(state => ({
@@ -40,6 +43,9 @@ class TodoContext extends Component {
   // fetch value from input 
   handleChange(e){
     this.setState({text: e.target.value})
+  }
+  dateChange(e){
+    this.setState({date: e.target.value})
   }
   
   // save task to local storage
@@ -78,6 +84,7 @@ class TodoContext extends Component {
         <TodoList tasks={this.state.tasks} handleDelete={this.handleDelete} setUpdate={this.setUpdate}/>
         <form onSubmit={this.handleSubmit}>
           <input className="Todo-add" onChange={this.handleChange} value={this.state.text} placeholder="What do you have to do?"/>
+          <input onChange={this.dateChange} type="date" placeholder="Add date" id="datepicker"/>
           <button className="Todo-add-btn" type="submit"> + </button>
         </form>
       </div>

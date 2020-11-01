@@ -15,3 +15,7 @@ it('includes TodoList', () => {
   const app = shallow(<TodoContext />);
   expect(app.containsMatchingElement(<TodoList />)).toEqual(true)
 });
+// it('the tasks array is empty', () => {
+//   const tasksList = shallow(<TodoContext />);
+
+// });

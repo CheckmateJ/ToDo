@@ -41,4 +41,6 @@ html{
     background-color: transparent;
     border: 0;
   }
-  
+  .datepick{
+    position: absolute;left: 35%;top: 70%;
+  }

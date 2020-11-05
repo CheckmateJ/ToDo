@@ -1,4 +1,4 @@
-
+/* 
 html{
     height: 100%;
   }
@@ -42,5 +42,39 @@ html{
     border: 0;
   }
   .datepick{
-    position: absolute;left: 35%;top: 70%;
-  }
+    position: absolute;left: 35%;top: 10%;
+  } */
+
+/* .container{
+    width: 200px;
+    background-color: white;
+  } */
+
+html, body {
+  height: 100%;
+  margin: 0;
+}
+
+.container {
+  padding-top: 5px;
+  background-color:#008B8B;
+  height: 50px;
+}
+.header{
+  text-align: center;
+}
+ul{
+  list-style-type:none
+}
+.todo{
+  text-align: center;
+}
+.add-list{
+  text-align: center;
+}
+.navi{
+  width: 200px;
+  padding: 20px;
+  height: 86vh;
+  border-right: 1px solid gray;
+}

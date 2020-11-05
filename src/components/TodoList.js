@@ -1,27 +1,28 @@
 import React, { Component } from 'react'
 
 
-class TodoList extends Component{
+class TodoList extends Component {
 
-    handleDelete(id){
-      this.props.handleDelete(id);
-    }
-  
-    render(){
-      return (
-        <div className="Todo-list">
-        <ol>
-          {this.props.tasks.map(task => (
-            <li className="tasks" key={task.id}>
-            <input type="text" id={task.id} value={task.text} onChange={(e) => { this.props.setUpdate(e.target.value, task.id)}}/> 
-            {task.date}
-            <button class="delete-item" onClick={this.handleDelete.bind(this,task)}>Delete</button>
-            </li>
-          ))}
-        </ol>
-        </div>
-      )
-    }
+  handleDelete(id) {
+    this.props.handleDelete(id);
   }
 
-  export default TodoList;
+  render() {
+    return (
+      <div>
+        <ul>
+          {this.props.tasks.map(task => (
+            <li key={task.id}>
+              {task.category}
+              <input type="text" id={task.id} value={task.text} onChange={(e) => { this.props.setUpdate(e.target.value, task.id) }} />
+              {task.date}
+              <button onClick={this.handleDelete.bind(this, task)}>Delete</button>
+            </li>
+          ))}
+        </ul>
+      </div>
+    )
+  }
+}
+
+export default TodoList;

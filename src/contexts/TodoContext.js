@@ -4,14 +4,14 @@ import TodoList from '../components/TodoList';
 class TodoContext extends Component {
   constructor(props) {
     super(props);
-    this.state = { tasks: [], text: '', name: "Todo List:", date: [], category: ' ' };
+    this.state = { tasks: [], text: '', name: "Todo List:", date: [], category: [], taskToShow: "all" };
     this.handleSubmit = this.handleSubmit.bind(this);
     this.handleChange = this.handleChange.bind(this);
     this.handleDelete = this.handleDelete.bind(this);
     this.setUpdate = this.setUpdate.bind(this);
     this.dateChange = this.dateChange.bind(this);
     this.categoryChange = this.categoryChange.bind(this);
-    // this.handleDisplay = this.handleDisplay.bind(this);
+
   }
 
   // SHOW ONLY ONCE EACH CATEGORY 
@@ -36,6 +36,8 @@ class TodoContext extends Component {
   // add new task to list 
   handleSubmit(e) {
     e.preventDefault();
+    this.state.tasks.forEach(element => console.log(element));
+
     // console.log(this.state.tasks.map(task => task.category))
     const newTask = {
       text: this.state.text,
@@ -92,12 +94,40 @@ class TodoContext extends Component {
   }
 
 
+  updateTaskToShow = (s) => {
+    this.setState({
+      taskToShow: s
+    })
+  }
+
   render() {
+
+    let todos = [];
+    var d = new Date();
+    var dateYesterday = d.getDate() < 10 ? '0' + (d.getDate() - 1) : '' + d.getDate() - 1
+    var dateYesterday = d.getDate() < 10 ? '0' + (d.getDate() - 1) : '' + d.getDate() - 1
+    var dateTomorrow = d.getDate() < 10 ? '0' + (d.getDate() + 1) : '' + d.getDate() + 1
+    var month = d.getMonth() + 1; 
+    var year = d.getFullYear();
+
+    var dateStrYesterday = year + "-" + month + "-" + dateYesterday;
+    var dateStrTomorrow = year + "-" + month + "-" + dateTomorrow;
+    
+    if (this.state.taskToShow === "all") {
+      todos = this.state.tasks;
+    }
+    else if (this.state.taskToShow === "tomorrow") {
+      todos = this.state.tasks.filter(todo => todo.date === dateStrTomorrow);
+    }
+    else if (this.state.taskToShow === "yesterday") {
+      todos = this.state.tasks.filter(todo => todo.date === dateStrYesterday);
+    }
+
     return (
       <div className="container" >
         <div className="header"><h3>{this.state.name}</h3></div>
         <div className="todo">
-          <TodoList tasks={this.state.tasks} handleDelete={this.handleDelete} setUpdate={this.setUpdate} />
+          <TodoList tasks={this.state.tasks} handleDelete={this.handleDelete} setUpdate={this.setUpdate} groupTasks={todos}/>
         </div>
         <div >
           <form onSubmit={this.handleSubmit} className="add-list">
@@ -106,7 +136,9 @@ class TodoContext extends Component {
             <input onChange={this.dateChange} type="date" placeholder="Add date" id="datepicker" />
             <button type="submit"> + </button>
           </form>
-          {/* <button onClick={this.handleDisplay}>show</button>  */}
+          <button onClick={() => this.updateTaskToShow("yesterday")}>yest</button>
+          <button onClick={() => this.updateTaskToShow("all")}>all tasks</button>
+          <button onClick={() => this.updateTaskToShow("tomorrow")}>tomorrow</button>
         </div>
       </div>
     )

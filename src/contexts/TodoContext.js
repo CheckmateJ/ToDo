@@ -1,16 +1,18 @@
 import React, { Component } from 'react'
 import TodoList from '../components/TodoList';
+import CategoryContext from './CategoryContext';
 
 class TodoContext extends Component {
   constructor(props) {
     super(props);
-    this.state = { tasks: [], text: '', name: "Todo List:", date: [], category: [], taskToShow: "all" };
+    this.state = { tasks: [], text: '', name: "Todo List:", date: [], category: [], taskToShow: "all", task_categories: props.task_categories };
     this.handleSubmit = this.handleSubmit.bind(this);
     this.handleChange = this.handleChange.bind(this);
     this.handleDelete = this.handleDelete.bind(this);
     this.setUpdate = this.setUpdate.bind(this);
     this.dateChange = this.dateChange.bind(this);
     this.categoryChange = this.categoryChange.bind(this);
+
 
   }
 
@@ -29,14 +31,14 @@ class TodoContext extends Component {
   // delete task
   handleDelete(id) {
     this.setState(prevState => ({
-      tasks: prevState.tasks.filter(el => el != id)
+      tasks: prevState.tasks.filter(el => el !== id)
     }));
   }
 
   // add new task to list 
   handleSubmit(e) {
     e.preventDefault();
-    this.state.tasks.forEach(element => console.log(element));
+    // this.state.tasks.forEach(element => console.log(element));
 
     // console.log(this.state.tasks.map(task => task.category))
     const newTask = {
@@ -100,19 +102,34 @@ class TodoContext extends Component {
     })
   }
 
+
+  Category = ()=> {
+    const uniqueItems = (x, i, array) => array.indexOf(x) === i;
+    const TASK_CATEGORIES = this.state.tasks.map(prod => prod.category).filter(
+      uniqueItems
+    )
+      this.setState({
+        task_categories: TASK_CATEGORIES
+      })
+    
+  }
+
+
   render() {
+
+    console.log(this.state.task_categories)
 
     let todos = [];
     var d = new Date();
     var dateYesterday = d.getDate() < 10 ? '0' + (d.getDate() - 1) : '' + d.getDate() - 1
     var dateYesterday = d.getDate() < 10 ? '0' + (d.getDate() - 1) : '' + d.getDate() - 1
     var dateTomorrow = d.getDate() < 10 ? '0' + (d.getDate() + 1) : '' + d.getDate() + 1
-    var month = d.getMonth() + 1; 
+    var month = d.getMonth() + 1;
     var year = d.getFullYear();
 
     var dateStrYesterday = year + "-" + month + "-" + dateYesterday;
     var dateStrTomorrow = year + "-" + month + "-" + dateTomorrow;
-    
+
     if (this.state.taskToShow === "all") {
       todos = this.state.tasks;
     }
@@ -127,23 +144,27 @@ class TodoContext extends Component {
       <div className="container" >
         <div className="header"><h3>{this.state.name}</h3></div>
         <div className="todo">
-          <TodoList tasks={this.state.tasks} handleDelete={this.handleDelete} setUpdate={this.setUpdate} groupTasks={todos}/>
+          <TodoList tasks={this.state.tasks} handleDelete={this.handleDelete} setUpdate={this.setUpdate} groupTasks={todos} />
         </div>
         <div >
-          <form onSubmit={this.handleSubmit} className="add-list">
+          <form onSubmit={this.handleSubmit} onClick={this.Category} className="add-list">
             <input onChange={this.categoryChange} value={this.state.category} placeholder="Enter the category" />
             <input onChange={this.handleChange} value={this.state.text} placeholder="What do you have to do?" />
             <input onChange={this.dateChange} type="date" placeholder="Add date" id="datepicker" />
-            <button type="submit"> + </button>
+            <button type="submit" > + </button>
           </form>
           <button onClick={() => this.updateTaskToShow("yesterday")}>yest</button>
           <button onClick={() => this.updateTaskToShow("all")}>all tasks</button>
           <button onClick={() => this.updateTaskToShow("tomorrow")}>tomorrow</button>
+          <button onClick={this.Category}>SHow categories</button>
+
         </div>
       </div>
     )
   }
 }
+
+
 
 
 export default TodoContext;

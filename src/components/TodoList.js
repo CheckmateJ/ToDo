@@ -14,7 +14,7 @@ class TodoList extends Component {
       todo.push(this.props.tasks.map(task => (task.text)))
 
     }
-    
+      
 
     return (
       <div>

@@ -5,14 +5,14 @@ import CategoryContext from './CategoryContext';
 class TodoContext extends Component {
   constructor(props) {
     super(props);
-    this.state = { tasks: [], text: '', name: "Todo List:", date: [], category: [], taskToShow: "all", task_categories: props.task_categories };
+    this.state = { tasks: [], text: '', name: "Todo List:", date: [], category: "", taskToShow: "all"};
     this.handleSubmit = this.handleSubmit.bind(this);
     this.handleChange = this.handleChange.bind(this);
     this.handleDelete = this.handleDelete.bind(this);
     this.setUpdate = this.setUpdate.bind(this);
     this.dateChange = this.dateChange.bind(this);
     this.categoryChange = this.categoryChange.bind(this);
-
+    this.setCategory = this.setCategory.bind(this);
 
   }
 
@@ -26,6 +26,13 @@ class TodoContext extends Component {
   //       task.category)))
   //   }
   // }
+
+
+  setCategory(category) {
+    this.setState({
+      displayCategory: category
+    });
+  }
 
 
   // delete task
@@ -103,21 +110,16 @@ class TodoContext extends Component {
   }
 
 
-  Category = ()=> {
-    const uniqueItems = (x, i, array) => array.indexOf(x) === i;
-    const TASK_CATEGORIES = this.state.tasks.map(prod => prod.category).filter(
-      uniqueItems
-    )
-      this.setState({
-        task_categories: TASK_CATEGORIES
-      })
-    
-  }
 
 
   render() {
 
-    console.log(this.state.task_categories)
+    const uniqueItems = (x, i, array) => array.indexOf(x) === i;
+    const TASK_CATEGORIES = this.state.tasks.map(prod => prod.category).filter(
+      uniqueItems
+    )
+    TASK_CATEGORIES.push("all");
+
 
     let todos = [];
     var d = new Date();
@@ -145,25 +147,64 @@ class TodoContext extends Component {
         <div className="header"><h3>{this.state.name}</h3></div>
         <div className="todo">
           <TodoList tasks={this.state.tasks} handleDelete={this.handleDelete} setUpdate={this.setUpdate} groupTasks={todos} />
+          <CategoryContext tasks={TASK_CATEGORIES} setCategory={this.setCategory} state={this.state}/>
+          {/* <UI setCategory={this.setCategory} state={this.state} /> */}
         </div>
         <div >
-          <form onSubmit={this.handleSubmit} onClick={this.Category} className="add-list">
+          <form onSubmit={this.handleSubmit} className="add-list">
             <input onChange={this.categoryChange} value={this.state.category} placeholder="Enter the category" />
             <input onChange={this.handleChange} value={this.state.text} placeholder="What do you have to do?" />
             <input onChange={this.dateChange} type="date" placeholder="Add date" id="datepicker" />
             <button type="submit" > + </button>
           </form>
+          
           <button onClick={() => this.updateTaskToShow("yesterday")}>yest</button>
           <button onClick={() => this.updateTaskToShow("all")}>all tasks</button>
           <button onClick={() => this.updateTaskToShow("tomorrow")}>tomorrow</button>
-          <button onClick={this.Category}>SHow categories</button>
-
         </div>
       </div>
     )
   }
 }
 
+// const ProductItems = ({ state: { tasks, displayCategory } }) => (
+//   <div>
+//     {tasks
+//       .filter(
+//         ({ category }) =>
+//           displayCategory === category || displayCategory === "all"
+//       )
+//       .map(({ text }) => (
+//         <div>{text}</div>
+//       ))}
+//   </div>
+// );
+
+// const ButtonCategories = (taskCategories, setCategory) =>
+//   taskCategories.map(categories => (
+//     <button
+//       key={categories}
+//       onClick={() => setCategory(categories)} >
+//       {categories}
+//     </button>
+//   ));
+
+// const UI = ({
+//   state,
+//   state: { taskCategories },
+//   setCategory
+// }) => (
+//     <div >
+//       <div >
+//         <h3>Filter by Category</h3>
+//         {ButtonCategories(taskCategories, setCategory)}
+//       </div>
+//       <div >
+//         <h3>Results</h3>
+//         <ProductItems state={state} />
+//       </div>
+//     </div>
+//   );
 
 
 

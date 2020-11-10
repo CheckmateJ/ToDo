@@ -8,7 +8,6 @@ import CategoryContext from './contexts/CategoryContext';
 ReactDOM.render(
   <React.StrictMode>
     <TodoContext/>
-    <CategoryContext/>
   </React.StrictMode>,
   document.getElementById('root')
 );

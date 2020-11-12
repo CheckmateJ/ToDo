@@ -23,7 +23,7 @@ class TodoContext extends Component {
 
   // add new task to list 
   handleSubmit(e) {
-    e.preventDefault();
+    
     const newTask = {
       text: this.state.text,
       date: this.state.date,

@@ -57,18 +57,53 @@ html, body {
 
 .container {
   padding-top: 5px;
-  background-color:#008B8B;
-  height: 50px;
+  background-color: #008B8B;
+  height: 58px;
 }
-.header{
+
+.header {
   text-align: center;
 }
-ul{
-  list-style-type:none
+
+ul {
+  list-style-type: none
 }
-.todo{
+
+.todo-list {
+  float: left;
   text-align: center;
+  justify-items: center;
+  width: 70%;
 }
+
+.btn-filter {
+  margin-bottom: 10px;
+}
+
+.filter {
+  display: block;
+  margin-bottom: 5px;
+  border: none;
+  padding: 0;
+  background: none;
+}
+
+.btns {
+  float: left;
+  width: 200px;
+  padding: 20px;
+  height: 80vh;
+  border-right: 5px solid gray;
+}
+
+.form-task {
+  clear: both;
+  text-align: center;
+
+}
+
+/*
+
 .add-list{
   text-align: center;
 }
@@ -78,9 +113,17 @@ ul{
   height: 86vh;
   border-right: 1px solid gray;
 }
-
-/* Have to change! */
-button{
-  float: right;
-  margin-right: 50px;
+.button{
+  text-align: center;
 }
+.filtered-category{
+  display: block;
+} 
+ */
+
+/* .button-filter{
+  position: relative; left: 2%; top: 5  0%;
+}
+.filtered-date{
+  display: block;
+} */

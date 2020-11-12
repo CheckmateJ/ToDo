@@ -1,37 +1,29 @@
-import React, { Component } from 'react'
+// import React, { Component } from 'react'
 
 
-class TodoList extends Component {
+// class TodoList extends Component {
 
-  handleDelete(id) {
-    this.props.handleDelete(id);
-  }
+//   handleDelete(id) {
+//     this.props.handleDelete(id);
+//   }
 
-  render() {
-    let todo = [];
-    if(this.props.tasks.map(task => (task.date === Date.now()))){
+//   render() {
 
-      todo.push(this.props.tasks.map(task => (task.text)))
+//     return (
+//       <div className="todo-list">
+//         <ul>
+//             {this.props.groupTasks.map(task => (
+//               <li key={task.id}>
+//               <input type="text" id={task.id} value={task.text} onChange={(e) => { this.props.setUpdate(e.target.value, task.id) }} />
+//               {task.date}
+//               <button onClick={this.handleDelete.bind(this, task)}>Delete</button>
+//               </li>
+//             ))}
 
-    }
-      
+//           </ul>
+//       </div>
+//     )
+//   }
+// }
 
-    return (
-      <div>
-        <ul>
-            {this.props.groupTasks.map(task => (
-              <li key={task.id}>
-               {task.category}
-              <input type="text" id={task.id} value={task.text} onChange={(e) => { this.props.setUpdate(e.target.value, task.id) }} />
-              {task.date}
-              <button onClick={this.handleDelete.bind(this, task)}>Delete</button>
-              </li>
-            ))}
-
-          </ul>
-      </div>
-    )
-  }
-}
-
-export default TodoList;
+// export default TodoList;

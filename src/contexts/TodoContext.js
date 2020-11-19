@@ -4,7 +4,7 @@ import CategoryContext from './CategoryContext';
 class TodoContext extends Component {
   constructor(props) {
     super(props);
-    this.state = { tasks: [], text: '', name: "Todo List:", date: [], category: "", taskToShow: "" };
+    this.state = { tasks: [], text: '', name: "Todo List:", date: [], category: "", taskToShow: "", displayCategory: '' };
     this.handleSubmit = this.handleSubmit.bind(this);
     this.handleChange = this.handleChange.bind(this);
     this.handleDelete = this.handleDelete.bind(this);
@@ -13,6 +13,13 @@ class TodoContext extends Component {
     this.categoryChange = this.categoryChange.bind(this);
 
   }
+
+  setCategory = (category) => {
+        this.setState({
+          displayCategory: category
+        });
+      }
+
 
   // delete task
   handleDelete(id) {
@@ -23,7 +30,8 @@ class TodoContext extends Component {
 
   // add new task to list 
   handleSubmit(e) {
-    
+
+    e.preventDefault();
     const newTask = {
       text: this.state.text,
       date: this.state.date,
@@ -32,10 +40,18 @@ class TodoContext extends Component {
     };
     this.setState(state => ({
       tasks: state.tasks.concat(newTask),
-      text: ''
+      text: '',
+      displayCategory: this.state.category
 
     }));
-
+    // if(this.state.displayCategory)
+    // {
+    //   // var theLast = this.state.tasks[this.state.tasks.length -1].category
+    //   this.setState({
+    //     displayCategory: this.state.category
+    //   })
+    // }
+    console.log(this.state.displayCategory)
   }
 
   // fetch value from input 
@@ -90,10 +106,10 @@ class TodoContext extends Component {
       <div className="container" >
         <div className="header"><h3>{this.state.name}</h3></div>
         {/* <TodoList tasks={this.state.tasks} handleDelete={this.handleDelete} setUpdate={this.setUpdate} groupTasks={todos} /> */}
-        <CategoryContext tasks={TASK_CATEGORIES} setCategory={this.setCategory} state={this.state} taskToShow={this.state.taskToShow} handleDelete={this.handleDelete} setUpdate={this.setUpdate} />
+        <CategoryContext cat={this.state.category} tasksList={this.state.tasks} display={this.state.displayCategory}  setCategory={this.setCategory} state={this.state} taskToShow={this.state.taskToShow} handleDelete={this.handleDelete} setUpdate={this.setUpdate} />
         <div className="form-task">
         <form onSubmit={this.handleSubmit} className="add-list">
-          <input onChange={this.categoryChange} type="text" value={this.state.category} placeholder="Enter the category" />
+          <input onChange={this.categoryChange}  type="text" value={this.state.category} placeholder="Enter the category" />
           <input onChange={this.handleChange} value={this.state.text} placeholder="What do you have to do?" />
           <input onChange={this.dateChange} type="date" placeholder="Add date" id="datepicker" />
           <button type="submit" > + </button>

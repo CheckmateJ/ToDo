@@ -1,29 +1,25 @@
-// import React, { Component } from 'react'
+import React, { Component } from 'react'
+import TaskDataBaseProvider from '../Providers/TaskDataBaseProvider';
 
-
-// class TodoList extends Component {
-
-//   handleDelete(id) {
-//     this.props.handleDelete(id);
-//   }
-
-//   render() {
-
-//     return (
-//       <div className="todo-list">
-//         <ul>
-//             {this.props.groupTasks.map(task => (
-//               <li key={task.id}>
-//               <input type="text" id={task.id} value={task.text} onChange={(e) => { this.props.setUpdate(e.target.value, task.id) }} />
-//               {task.date}
-//               <button onClick={this.handleDelete.bind(this, task)}>Delete</button>
-//               </li>
-//             ))}
-
-//           </ul>
-//       </div>
-//     )
-//   }
-// }
-
-// export default TodoList;
+export default class TodoList extends Component {
+    constructor(props) {
+        super(props);
+        let taskProvider = new TaskDataBaseProvider();
+        this.state = {todos: taskProvider.getTasks()};
+      }
+    render() {
+        return (
+            <div>
+            <div className="btns">
+                <ul>
+                {this.state.todos.map(task => (
+                   <li>
+                       {task}
+                   </li>
+                ))}
+                 </ul>
+                </div>
+            </div>
+        )
+    }
+}

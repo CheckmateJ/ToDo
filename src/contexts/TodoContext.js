@@ -4,7 +4,7 @@ import CategoryContext from './CategoryContext';
 class TodoContext extends Component {
   constructor(props) {
     super(props);
-    this.state = { tasks: [], text: '', name: "Todo List:", date: [], category: "", taskToShow: "", displayCategory: '' };
+    this.state = { tasks: [], text: '', name: "Todo List:", date: [], category: "default", taskToShow: "", displayCategory: '' };
     this.handleSubmit = this.handleSubmit.bind(this);
     this.handleChange = this.handleChange.bind(this);
     this.handleDelete = this.handleDelete.bind(this);
@@ -29,21 +29,21 @@ class TodoContext extends Component {
   }
 
   // add new task to list 
-  handleSubmit(e) {
+    handleSubmit(e) {
 
-    e.preventDefault();
-    const newTask = {
-      text: this.state.text,
-      date: this.state.date,
-      category: this.state.category,
-      id: Date.now()
-    };
-    this.setState(state => ({
-      tasks: state.tasks.concat(newTask),
-      text: '',
-      displayCategory: this.state.category
+      e.preventDefault();
+      const newTask = {
+        text: this.state.text,
+        date: this.state.date,
+        category: this.state.category,
+        id: Date.now()
+      };
+      this.setState(state => ({
+        tasks: state.tasks.concat(newTask),
+        text: '',
+        displayCategory: this.state.category
 
-    }));
+      }));
     // if(this.state.displayCategory)
     // {
     //   // var theLast = this.state.tasks[this.state.tasks.length -1].category

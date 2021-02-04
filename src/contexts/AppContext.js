@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import { BrowserRouter as Router } from 'react-router-dom'
 import { Link, Route, Switch } from 'react-router-dom'
 import TodoRootComponent from '../components/TodoRootComponent'
-import TodoContext from './TodoContext'
+
 
 export default class AppContext extends Component {
     render() {

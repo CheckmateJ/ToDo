@@ -1,20 +1,19 @@
 import { render } from "@testing-library/react";
 import React, { Component } from 'react'
-import CategoryList from "../components/CategoryList";
+
 
 export default class TaskDataBaseProvider extends Component {
-    tasks = null;
+    
     arr = [{ "category": "default" }];
     constructor(props) {
         super(props);
-        this.LoadData();
-        this.state = {tasks: [], category: "",}
-        if (this.tasks === null) {
+        this.state = { tasks: [], category: "" }
+        if (this.tasks == null) {
             localStorage.setItem('tasks', JSON.stringify(this.arr))
         }
-        // this.addCategory();
-        // let categoryList = new CategoryList();
-        // this.state = {tasks:  categoryList.state.tasks}
+        this.LoadData();
+        this.handleSubmit = this.handleSubmit.bind(this);
+        this.categoryChange = this.categoryChange.bind(this);
     }
 
     LoadData() {
@@ -31,51 +30,42 @@ export default class TaskDataBaseProvider extends Component {
 
     getTasks() {
         return [...new Set(this.tasks.map(item => {
-            console.log(item.text)
             return item.text;
         }))]
     }
 
-    
-    handleSubmit = (e) => {
+
+    handleSubmit(e) {
         e.preventDefault();
         const newTask = {
-            //   text: this.state.text,
-            //   date: this.state.date,
             category: this.state.category,
-            //   id: Date.now()
+            id: Date.now()
         };
         this.setState(state => ({
             tasks: state.tasks.concat(newTask),
-            //   text: '',
-            //   displayCategory: this.state.category
-
+            category: ''
         }));
 
     }
 
-    categoryChange = (e) => {
+    categoryChange(e) {
         this.setState({ category: e.target.value })
-
-        console.log(this.state.category)
     }
 
 
-    
+
     componentDidUpdate() {
         localStorage.setItem('tasks', JSON.stringify(this.state.tasks))
     }
 
-    render(){
+    render() {
         return (
             <div className="newCategory">
-            <form onSubmit={this.handleSubmit} className="add-category">
-                <input onChange={this.categoryChange} type="text" value={this.state.category} placeholder="Enter the category" />
-                <button type="submit"> + </button>
-            </form>
-        </div>
+                <form onSubmit={this.handleSubmit} className="add-category">
+                    <input onChange={this.categoryChange} type="text" value={this.state.category} placeholder="Enter the category" />
+                    <button type="submit"> + </button>
+                </form>
+            </div>
         )
     }
-
-
 }

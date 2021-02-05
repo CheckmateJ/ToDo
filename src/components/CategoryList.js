@@ -7,11 +7,6 @@ export default class CategoryList extends Component {
         this.state = { todos: categoryProvider.getCategories() };
     }
 
-    // componentDidUpdate(){
-    //     this.state.local();
-    // }
-
-
     render() {
         return (
             <div>

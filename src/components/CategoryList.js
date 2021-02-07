@@ -4,14 +4,15 @@ export default class CategoryList extends Component {
     constructor(props) {
         super(props);
         let categoryProvider = new TaskDataBaseProvider();
-        this.state = { todos: categoryProvider.getCategories() };
+        categoryProvider.LoadData(); 
+        this.state = { categories: categoryProvider.getCategories()};
     }
 
     render() {
         return (
             <div>
                 <div className="btns">
-                    {this.state.todos.map(category => (
+                    {this.state.categories.map(category => (
                         <button className="filter"
                             key={category}
                             onClick={() => this.setCategory(category)} >

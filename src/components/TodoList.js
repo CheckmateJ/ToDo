@@ -5,12 +5,12 @@ export default class TodoList extends Component {
     constructor(props) {
         super(props);
         let taskProvider = new TaskDataBaseProvider();
-        this.state = {todos: taskProvider.getTasks()};
+        // this.state = {todos: taskProvider.getTasks()};
       }
     render() {
         return (
             <div>
-            <div className="btns">
+            {/* <div className="btns">
                 <ul>
                 {this.state.todos.map(task => (
                    <li>
@@ -18,7 +18,7 @@ export default class TodoList extends Component {
                    </li>
                 ))}
                  </ul>
-                </div>
+                </div> */}
             </div>
         )
     }

@@ -3,27 +3,28 @@ import React, { Component } from 'react'
 
 
 export default class TaskDataBaseProvider extends Component {
-    
-    arr = [{ "category": "default" }];
     constructor(props) {
         super(props);
         this.state = { tasks: [], category: "" }
-        if (this.tasks == null) {
-            localStorage.setItem('tasks', JSON.stringify(this.arr))
-        }
         this.LoadData();
-        this.handleSubmit = this.handleSubmit.bind(this);
-        this.categoryChange = this.categoryChange.bind(this);
     }
 
     LoadData() {
-        this.tasks = JSON.parse(localStorage.getItem('tasks'))
+        if (this.tasks == null)
+            return this.tasks = []
+    }
+
+    componentWillMount() {
+        let tasksList = localStorage.getItem('tasks')
+        if (tasksList) {
+            this.setState({
+                tasks: JSON.parse(localStorage.getItem('tasks'))
+            })
+        }
     }
 
     getCategories() {
-
         return [...new Set(this.tasks.map(item => {
-            console.log(item.category)
             return item.category;
         }))]
     }
@@ -35,7 +36,7 @@ export default class TaskDataBaseProvider extends Component {
     }
 
 
-    handleSubmit(e) {
+    handleSubmit = (e) => {
         e.preventDefault();
         const newTask = {
             category: this.state.category,
@@ -48,7 +49,7 @@ export default class TaskDataBaseProvider extends Component {
 
     }
 
-    categoryChange(e) {
+    categoryChange = (e) =>{
         this.setState({ category: e.target.value })
     }
 
@@ -59,6 +60,7 @@ export default class TaskDataBaseProvider extends Component {
     }
 
     render() {
+        console.log(this.state.category)
         return (
             <div className="newCategory">
                 <form onSubmit={this.handleSubmit} className="add-category">

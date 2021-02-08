@@ -5,69 +5,47 @@ import React, { Component } from 'react'
 export default class TaskDataBaseProvider extends Component {
     constructor(props) {
         super(props);
-        this.state = { tasks: [], category: "" }
-        this.LoadData();
+        // this.state = { category: this.props.category}
+        // this.LoadData();
+        // console.log(this.props.cat)
     }
 
     LoadData() {
-        if (this.tasks == null)
-            return this.tasks = []
+        console.log(this.props.state.categories)
+        if (this.props.state.categories == null)
+            return this.props.state.categories = []
     }
 
-    componentWillMount() {
-        let tasksList = localStorage.getItem('tasks')
-        if (tasksList) {
-            this.setState({
-                tasks: JSON.parse(localStorage.getItem('tasks'))
-            })
-        }
-    }
+    // componentWillMount() {
+    //     let categoriesList = localStorage.getItem('categories')
+    //     if (props.state.categoriesList) {
+    //         this.setState({
+    //             props.state.categories: JSON.parse(localStorage.getItem('props.state.categories'))
+    //         })
+    //     }
+    // }
 
     getCategories() {
-        return [...new Set(this.tasks.map(item => {
+        return [...new Set(this.props.state.categories.map(item => {
             return item.category;
         }))]
     }
 
     getTasks() {
-        return [...new Set(this.tasks.map(item => {
+        return [...new Set(this.props.state.categories.map(item => {
             return item.text;
         }))]
     }
 
 
-    handleSubmit = (e) => {
-        e.preventDefault();
-        const newTask = {
-            category: this.state.category,
-            id: Date.now()
-        };
-        this.setState(state => ({
-            tasks: state.tasks.concat(newTask),
-            category: ''
-        }));
-
-    }
-
-    categoryChange = (e) =>{
-        this.setState({ category: e.target.value })
-    }
+    // componentDidUpdate() {
+    //     localStorage.setItem('categories', JSON.stringify(this.state.props.state.categories))
+    // }
 
 
-
-    componentDidUpdate() {
-        localStorage.setItem('tasks', JSON.stringify(this.state.tasks))
-    }
-
-    render() {
-        console.log(this.state.category)
-        return (
-            <div className="newCategory">
-                <form onSubmit={this.handleSubmit} className="add-category">
-                    <input onChange={this.categoryChange} type="text" value={this.state.category} placeholder="Enter the category" />
-                    <button type="submit"> + </button>
-                </form>
-            </div>
-        )
+    render(){
+        return (<div>
+            
+        </div>)
     }
 }

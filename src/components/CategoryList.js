@@ -3,18 +3,19 @@ import TaskDataBaseProvider from '../Providers/TaskDataBaseProvider'
 export default class CategoryList extends Component {
     constructor(props) {
         super(props);
-        // let categoryProvider = new TaskDataBaseProvider();
-        this.state = { categories: [], category: "dafdf" };
+        this.categoryProvider = new TaskDataBaseProvider();
+        this.state = { categories: this.categoryProvider.getCategories(), category: "dafdf" };
     }
 
     handleSubmit = (e) => {
         e.preventDefault();
-        const newTask = {
+        const newCategory = {
             category: this.state.category,
             id: Date.now()
         };
+        this.categoryProvider.saveCategory(newCategory);
         this.setState(state => ({
-            categories: state.categories.concat(newTask),
+            categories: this.categoryProvider.getCategories(),
             category: ''
         }));
 
@@ -28,22 +29,21 @@ export default class CategoryList extends Component {
         console.log(this.state.categories)
         return (
             <div>
-                <TaskDataBaseProvider state={this.state}/>
                 <div className="newCategory">
                     <form onSubmit={this.handleSubmit} className="add-category">
                         <input onChange={this.categoryChange} type="text" value={this.state.category} placeholder="Enter the category" />
                         <button type="submit"> + </button>
                     </form>
                 </div>
-                {/* <div className="btns">
-                    {this.state.uniqueCategories.map(category => (
+                <div className="btns">
+                    {this.state.categories.map(category => (
                         <button className="filter"
                             key={category}
                             onClick={() => this.setCategory(category)} >
-                            {category}
+                            {category.category}
                         </button>
                     ))}
-                </div> */}
+                </div>
             </div>
         )
     }

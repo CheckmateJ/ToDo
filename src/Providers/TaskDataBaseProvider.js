@@ -5,15 +5,17 @@ import React, { Component } from 'react'
 export default class TaskDataBaseProvider extends Component {
     constructor(props) {
         super(props);
+        this.LoadData();
         // this.state = { category: this.props.category}
-        // this.LoadData();
         // console.log(this.props.cat)
     }
 
     LoadData() {
-        console.log(this.props.state.categories)
-        if (this.props.state.categories == null)
-            return this.props.state.categories = []
+        this.categories = JSON.parse(localStorage.getItem('props.state.categories'));
+        // checking for null or non-array data in localstorage
+        if(!this.categories || !this.categories.map) {
+            this.categories = [];
+        }
     }
 
     // componentWillMount() {
@@ -26,9 +28,14 @@ export default class TaskDataBaseProvider extends Component {
     // }
 
     getCategories() {
-        return [...new Set(this.props.state.categories.map(item => {
-            return item.category;
+        return [...new Set(this.categories.map(item => {
+            return item;
         }))]
+    }
+
+    saveCategory(category) {
+        this.categories.push(category);
+        localStorage.setItem('props.state.categories', JSON.stringify(this.categories))
     }
 
     getTasks() {

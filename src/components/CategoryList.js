@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import { Link } from 'react-router-dom';
 import TaskDataBaseProvider from '../Providers/TaskDataBaseProvider'
 import NavCategory from './NavCategory';
+import TodoList from './TodoList';
 export default class CategoryList extends Component {
     constructor(props) {
         super(props);
@@ -36,17 +37,10 @@ export default class CategoryList extends Component {
                         <button type="submit"> + </button>
                     </form>
                     <NavCategory categories={this.state.categories}/>
+                    {/* <TodoList categoryId={this.state.categories}/> */}
                 </div>
 
-                {/* <div className="btns">
-                    {this.state.categories.map(category => (
-                        <button className="filter"
-                            key={category}
-                            onClick={() => this.setCategory(category)} >
-                            {category.category}
-                        </button>
-                    ))}
-                </div> */}
+              
             </div>
         )
     }

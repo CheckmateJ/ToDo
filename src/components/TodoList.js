@@ -5,7 +5,8 @@ export default class TodoList extends Component {
     constructor(props) {
         super(props);
         this.taskProvider = new TaskDataBaseProvider();
-        this.state = {tasks: this.taskProvider.getTasks(), task: ''};
+        // this.categoryProvider = new TaskDataBaseProvider();
+        this.state = {tasks: this.taskProvider.getTasks(), task: '' };
       }
 
       handleSubmit = (e) => {
@@ -15,6 +16,9 @@ export default class TodoList extends Component {
             id: Date.now()
         };
         this.taskProvider.saveTask(newTask);
+        console.log(newTask)
+        
+        // if(new)
         this.setState(state => ({
             tasks: this.taskProvider.getTasks(),
             task: ''
@@ -27,6 +31,7 @@ export default class TodoList extends Component {
     }
 
     render() {
+        // console.log(this.state.categories[0].id)
         return (
             <div>
                 <div className="newTask">

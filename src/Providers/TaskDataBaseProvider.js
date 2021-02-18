@@ -12,8 +12,10 @@ export default class TaskDataBaseProvider extends Component {
         this.categories = JSON.parse(localStorage.getItem('props.state.categories'));
         this.tasks = JSON.parse(localStorage.getItem('props.state.tasks'));
         // checking for null or non-array data in localstorage
-        if (!this.categories || !this.categories.map || !this.tasks || !this.tasks.map) {
+        if (!this.categories || !this.categories.map) {
             this.categories = [];
+        }
+        if(!this.tasks || !this.tasks.map){
             this.tasks = [];
         }
     }

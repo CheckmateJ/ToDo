@@ -1,18 +1,19 @@
-import React from 'react'
+
 import { Link } from 'react-router-dom'
 
-const NavCategory = (props) => {
+import React, { Component } from 'react'
 
-    const renderCategoryNav = () => {
-        let Category = props.categories.map(category => <Link to = {`/category/${category.id}`}> {category.category}  </Link> )
-        return Category
+export default class NavCategory extends Component {
+    constructor(props) {
+        super(props);
+        this.state = {CategoryId: ''}
     }
-    return (
-        <div>
-            <Link to='/'> Home </Link>
-            {renderCategoryNav()}
-        </div>
-    )
+  
+    render() {
+        return (
+            <div>
+                {this.props.categories.map(category => <Link to = {`/category/${category.id}`}> {category.category}  </Link> )}
+            </div>
+        )
+    }
 }
-
-export default NavCategory

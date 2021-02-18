@@ -1,10 +1,12 @@
 import React, { Component } from 'react'
+import { Link } from 'react-router-dom';
 import TaskDataBaseProvider from '../Providers/TaskDataBaseProvider'
+import NavCategory from './NavCategory';
 export default class CategoryList extends Component {
     constructor(props) {
         super(props);
         this.categoryProvider = new TaskDataBaseProvider();
-        this.state = { categories: this.categoryProvider.getCategories(), category: "dafdf" };
+        this.state = { categories: this.categoryProvider.getCategories(), category: "" };
     }
 
     handleSubmit = (e) => {
@@ -26,7 +28,6 @@ export default class CategoryList extends Component {
     }
 
     render() {
-        console.log(this.state.categories)
         return (
             <div>
                 <div className="newCategory">
@@ -34,8 +35,10 @@ export default class CategoryList extends Component {
                         <input onChange={this.categoryChange} type="text" value={this.state.category} placeholder="Enter the category" />
                         <button type="submit"> + </button>
                     </form>
+                    <NavCategory categories={this.state.categories}/>
                 </div>
-                <div className="btns">
+
+                {/* <div className="btns">
                     {this.state.categories.map(category => (
                         <button className="filter"
                             key={category}
@@ -43,8 +46,9 @@ export default class CategoryList extends Component {
                             {category.category}
                         </button>
                     ))}
-                </div>
+                </div> */}
             </div>
         )
     }
 }
+

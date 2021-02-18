@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { BrowserRouter as Router } from 'react-router-dom'
+import { BrowserRouter, BrowserRouter as Router } from 'react-router-dom'
 import { Link, Route, Switch } from 'react-router-dom'
 import TodoRootComponent from '../components/TodoRootComponent'
 
@@ -10,7 +10,7 @@ export default class AppContext extends Component {
             <Router>
                 <div>
                     <nav>
-                        {/* <ul>
+                        <ul>
                             <li>
                                 <Link to="/">Home</Link>
                             </li>
@@ -20,7 +20,7 @@ export default class AppContext extends Component {
                             <li>
                                 <Link to="/users">Users</Link>
                             </li>
-                        </ul> */}
+                        </ul>
                     </nav>
                     <Switch>
                         <Route path="/">

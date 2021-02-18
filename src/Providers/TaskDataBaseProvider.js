@@ -6,26 +6,18 @@ export default class TaskDataBaseProvider extends Component {
     constructor(props) {
         super(props);
         this.LoadData();
-        // this.state = { category: this.props.category}
-        // console.log(this.props.cat)
     }
 
     LoadData() {
         this.categories = JSON.parse(localStorage.getItem('props.state.categories'));
+        this.tasks = JSON.parse(localStorage.getItem('props.state.tasks'));
         // checking for null or non-array data in localstorage
-        if(!this.categories || !this.categories.map) {
+        if (!this.categories || !this.categories.map || !this.tasks || !this.tasks.map) {
             this.categories = [];
+            this.tasks = [];
         }
     }
 
-    // componentWillMount() {
-    //     let categoriesList = localStorage.getItem('categories')
-    //     if (props.state.categoriesList) {
-    //         this.setState({
-    //             props.state.categories: JSON.parse(localStorage.getItem('props.state.categories'))
-    //         })
-    //     }
-    // }
 
     getCategories() {
         return [...new Set(this.categories.map(item => {
@@ -39,20 +31,20 @@ export default class TaskDataBaseProvider extends Component {
     }
 
     getTasks() {
-        return [...new Set(this.props.state.categories.map(item => {
-            return item.text;
+        return [...new Set(this.tasks.map(item => {
+            return item;
         }))]
     }
 
+    saveTask(task) {
+        this.tasks.push(task);
+        localStorage.setItem('props.state.tasks', JSON.stringify(this.tasks))
+    }
 
-    // componentDidUpdate() {
-    //     localStorage.setItem('categories', JSON.stringify(this.state.props.state.categories))
-    // }
 
-
-    render(){
+    render() {
         return (<div>
-            
+
         </div>)
     }
 }

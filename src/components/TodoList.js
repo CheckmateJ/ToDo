@@ -1,29 +1,26 @@
 import React, { Component } from 'react'
 import TaskDataBaseProvider from '../Providers/TaskDataBaseProvider';
+import NavCategory from './NavCategory';
 
 export default class TodoList extends Component {
     constructor(props) {
         super(props);
         this.taskProvider = new TaskDataBaseProvider();
-        // this.categoryProvider = new TaskDataBaseProvider();
-        this.state = {tasks: this.taskProvider.getTasks(), task: '' };
-      }
+        this.navCategory = new NavCategory();
+        this.state = { tasks: this.taskProvider.getTasks(), task: '' };
+    }
 
-      handleSubmit = (e) => {
+    handleSubmit = (e) => {
         e.preventDefault();
         const newTask = {
             task: this.state.task,
-            id: Date.now()
+            id: this.props.catId
         };
         this.taskProvider.saveTask(newTask);
-        console.log(newTask)
-        
-        // if(new)
         this.setState(state => ({
             tasks: this.taskProvider.getTasks(),
             task: ''
         }));
-
     }
 
     taskChange = (e) => {
@@ -31,7 +28,7 @@ export default class TodoList extends Component {
     }
 
     render() {
-        // console.log(this.state.categories[0].id)
+        console.log(this.props.catId)
         return (
             <div>
                 <div className="newTask">
@@ -40,17 +37,6 @@ export default class TodoList extends Component {
                         <button type="submit"> + </button>
                     </form>
                 </div>
-
-
-            {/* <div className="btns">
-                <ul>
-                {this.state.todos.map(task => (
-                   <li>
-                       {task}
-                   </li>
-                ))}
-                 </ul>
-                </div> */}
             </div>
         )
     }

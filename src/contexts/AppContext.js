@@ -11,7 +11,7 @@ export default class AppContext extends Component {
                 <div>
                     <nav>
                         <ul>
-                            <li>
+                            {/* <li>
                                 <Link to="/">Home</Link>
                             </li>
                             <li>
@@ -19,7 +19,7 @@ export default class AppContext extends Component {
                             </li>
                             <li>
                                 <Link to="/users">Users</Link>
-                            </li>
+                            </li> */}
                         </ul>
                     </nav>
                     <Switch>

@@ -1,8 +1,6 @@
 import React, { Component } from 'react'
-import { Link } from 'react-router-dom';
 import TaskDataBaseProvider from '../Providers/TaskDataBaseProvider'
 import NavCategory from './NavCategory';
-import TodoList from './TodoList';
 export default class CategoryList extends Component {
     constructor(props) {
         super(props);
@@ -36,11 +34,10 @@ export default class CategoryList extends Component {
                         <input onChange={this.categoryChange} type="text" value={this.state.category} placeholder="Enter the category" />
                         <button type="submit"> + </button>
                     </form>
-                    <NavCategory categories={this.state.categories}/>
-                    {/* <TodoList categoryId={this.state.categories}/> */}
+                    <NavCategory categories={this.state.categories} />
                 </div>
 
-              
+
             </div>
         )
     }

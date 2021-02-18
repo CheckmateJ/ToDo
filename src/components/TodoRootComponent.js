@@ -14,7 +14,6 @@ export default class TodoRootComponent extends Component {
                 <div className="container" >
                     <div className="header"><h3>{this.state.name}</h3></div>
                     <CategoryList/>
-                    <TodoList/>
                 </div>
             </div>
         )

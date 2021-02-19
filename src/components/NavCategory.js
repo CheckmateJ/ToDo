@@ -16,7 +16,6 @@ export default class NavCategory extends Component {
 
 
     render() {
-        console.log(this.state.CategoryId);
         return (
             <div>
                 {this.props.categories.map(category => <Link to={`/category/${category.id}`} onClick={() => this.setCategory(category)}> {category.category}  </Link>)}

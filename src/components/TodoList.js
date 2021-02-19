@@ -27,8 +27,18 @@ export default class TodoList extends Component {
         this.setState({ task: e.target.value })
     }
 
+
+    displayTasks =() => {
+        const tasks = this.state.tasks.filter(task => task.id == this.props.catId)
+        return <div>
+            {tasks.map(task => task.task + ' ')} 
+        </div>
+        
+       
+        
+    }
+
     render() {
-        console.log(this.props.catId)
         return (
             <div>
                 <div className="newTask">
@@ -36,6 +46,7 @@ export default class TodoList extends Component {
                         <input onChange={this.taskChange} type="text" value={this.state.task} placeholder="Enter the task" />
                         <button type="submit"> + </button>
                     </form>
+                    {this.displayTasks()}
                 </div>
             </div>
         )

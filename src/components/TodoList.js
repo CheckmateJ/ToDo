@@ -28,15 +28,19 @@ export default class TodoList extends Component {
     }
 
 
-    displayTasks =() => {
+    displayTasks = () => {
         const tasks = this.state.tasks.filter(task => task.id == this.props.catId)
-        return <div>
-            {tasks.map(task => task.task + ' ')} 
-        </div>
-        
-       
-        
-    }
+        if (tasks) {
+            return <div>
+                {tasks.map(task => task.task + ' ')}
+            </div>
+        }
+        }
+
+
+
+
+    
 
     render() {
         return (

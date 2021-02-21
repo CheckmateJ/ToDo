@@ -15,9 +15,10 @@ export default class TaskDataBaseProvider extends Component {
         if (!this.categories || !this.categories.map) {
             this.categories = [];
         }
-        if(!this.tasks || !this.tasks.map){
+        if (!this.tasks || !this.tasks.map) {
             this.tasks = [];
         }
+        // console.log(this.categories.map(cat => cat.id))
     }
 
 
@@ -43,6 +44,16 @@ export default class TaskDataBaseProvider extends Component {
         localStorage.setItem('props.state.tasks', JSON.stringify(this.tasks))
     }
 
+    
+
+    // delete category
+    deleteCategory(id) {
+            const items = this.categories
+            const filtered = items.filter(item => item.id !== id );
+            localStorage.setItem('props.state.categories', JSON.stringify(filtered))
+            this.LoadData();
+            window.location.reload();  
+    }
 
     render() {
         return (<div>

@@ -19,7 +19,6 @@ export default class NavCategory extends Component {
 
     deleteCategory(id) {
         this.deleteProvider.deleteCategory(id);
-        // window.location.reload(false);
       }
 
 

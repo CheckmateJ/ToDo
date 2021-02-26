@@ -50,15 +50,28 @@ export default class TaskDataBaseProvider extends Component {
         this.LoadData();
         const filtered = this.categories.filter(cat => cat.id !== id);
         localStorage.setItem('props.state.categories', JSON.stringify(filtered))
-        window.location.reload();  
+        window.location.reload();
     }
 
     //delete task
     deleteTask(taskName) {
-        this.LoadData();    
+        this.LoadData();
         const filtered = this.tasks.filter(task => task.task !== taskName)
-        localStorage.setItem('props.state.tasks', JSON.stringify(filtered)) 
+        localStorage.setItem('props.state.tasks', JSON.stringify(filtered))
         window.location.reload();
+    }
+
+    // edit existing task
+    setUpdate(text, id) {
+        const categories = this.categories;
+        categories.map(cat => {
+            if (cat.id === id) {
+                cat.category = text;
+            }
+        })
+        this.setState({
+            categories: categories
+        })
     }
 
     render() {

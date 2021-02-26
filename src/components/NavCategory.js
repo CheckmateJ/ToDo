@@ -7,7 +7,7 @@ import TaskDataBaseProvider from '../Providers/TaskDataBaseProvider';
 export default class NavCategory extends Component {
     constructor(props) {
         super(props);
-        this.deleteProvider = new TaskDataBaseProvider();
+        this.categoryProvider = new TaskDataBaseProvider();
         this.state = { CategoryId: '' }
     }
     setCategory = (category) => {
@@ -18,16 +18,22 @@ export default class NavCategory extends Component {
 
 
     deleteCategory(id) {
-        this.deleteProvider.deleteCategory(id);
-      }
+        this.categoryProvider.deleteCategory(id);
+    }
+
+      setUpdate = (text,id) => {
+        this.categoryProvider.setUpdate(text,id);
+    }
+
 
 
 
     render() {
         return (
             <div>
-                {this.props.categories.map(category =><ul> <Link to={`/category/${category.id}`}onClick={() => this.setCategory(category)}> {category.category}</Link>
-                 <button onClick={this.deleteCategory.bind(this, category.id)}>Delete</button></ul>)}
+                {this.props.categories.map(category => <ul> <Link to={`/category/${category.id}`} onClick={() => this.setCategory(category)}>
+                    <input type="text" id={category.id} value={category.category} onChange={(e) => { this.setUpdate(e.target.value, category.id) }}/></Link>
+                    <button onClick={this.deleteCategory.bind(this, category.id)}>Delete</button></ul>)}
                 <TodoList catId={this.state.CategoryId} />
             </div>
         )

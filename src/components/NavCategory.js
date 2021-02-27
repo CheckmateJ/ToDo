@@ -32,7 +32,7 @@ export default class NavCategory extends Component {
         return (
             <div>
                 {this.props.categories.map(category => <ul> <Link to={`/category/${category.id}`} onClick={() => this.setCategory(category)}>
-                    <input type="text" id={category.id} value={category.category} onChange={(e) => { this.setUpdate(e.target.value, category.id) }}/></Link>
+                    <input type="text" id={category.id} defaultValue={category.category} onChange={(e) => { this.setUpdate(e.target.value, category.id) }}/></Link>
                     <button onClick={this.deleteCategory.bind(this, category.id)}>Delete</button></ul>)}
                 <TodoList catId={this.state.CategoryId} />
             </div>

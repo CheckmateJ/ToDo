@@ -66,12 +66,13 @@ export default class TaskDataBaseProvider extends Component {
         const categories = this.categories;
         categories.map(cat => {
             if (cat.id === id) {
-                cat.category = text;
+                cat.category = text
             }
         })
         this.setState({
-            categories: categories
+            categories: localStorage.setItem('props.state.categories', JSON.stringify(this.categories))
         })
+
     }
 
     render() {

@@ -37,6 +37,12 @@ export default class TodoList extends Component {
     }
 
 
+    setUpdateTask = (text,id) => {
+        this.taskProvider.setUpdateTask(text,id);
+    }
+
+
+
     displayTasks = () => {
         const tasks = this.state.tasks.filter(task => task.id == this.props.catId)
         //     console.log(this.state.tasks.filter(task => task.id !== this.category.categories.map(el => el.id) ))
@@ -44,7 +50,8 @@ export default class TodoList extends Component {
         // {
         // }
         return <div>
-            {tasks.map(task =><ul> <li key={task.id}>{task.task + ' '}
+            {tasks.map(task =><ul> <li key={task.id}>   
+            <input type="text" id={task.id} defaultValue={task.task} onChange={(e) => { this.setUpdateTask(e.target.value, task.id) }}/>
             <button onClick={this.deleteTask.bind(this,task.task)}>Delete</button></li></ul>)}
         </div>
     }

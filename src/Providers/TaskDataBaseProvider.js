@@ -61,8 +61,8 @@ export default class TaskDataBaseProvider extends Component {
         window.location.reload();
     }
 
-    // edit existing task
-    setUpdate(text, id) {
+    // edit existing Category  
+    setUpdateCategory(text, id) {
         const categories = this.categories;
         categories.map(cat => {
             if (cat.id === id) {
@@ -71,6 +71,20 @@ export default class TaskDataBaseProvider extends Component {
         })
         this.setState({
             categories: localStorage.setItem('props.state.categories', JSON.stringify(this.categories))
+        })
+
+    }
+
+    // edit existing task
+    setUpdateTask(text, id) {
+        const tasks = this.tasks;
+        tasks.map(task => {
+            if (task.id === id) {
+                task.task = text
+            }
+        })
+        this.setState({
+            tasks: localStorage.setItem('props.state.tasks', JSON.stringify(this.tasks))
         })
 
     }

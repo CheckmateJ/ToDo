@@ -1,11 +1,14 @@
 import { render } from "@testing-library/react";
 import React, { Component } from 'react'
+import _ from 'lodash';
+import isEqual from 'lodash/isEqual';
 
 
 export default class TaskDataBaseProvider extends Component {
     constructor(props) {
         super(props);
         this.LoadData();
+
     }
 
     LoadData() {
@@ -88,6 +91,19 @@ export default class TaskDataBaseProvider extends Component {
         })
 
     }
+
+    countingTasks() {
+    
+        const result = [...this.tasks.reduce((acc, current) => {
+            if (!acc.has(current.id)) acc.set(current.id, { ...current, count: 0 });
+            acc.get(current.id).count++;
+            return acc;
+        }, new Map).values()];
+
+        console.log(result);
+
+    }
+
 
     render() {
         return (<div>

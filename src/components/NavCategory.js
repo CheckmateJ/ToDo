@@ -8,6 +8,7 @@ export default class NavCategory extends Component {
     constructor(props) {
         super(props);
         this.categoryProvider = new TaskDataBaseProvider();
+        this.categoryProvider.countingTasks();
         this.state = { CategoryId: '' }
     }
     setCategory = (category) => {

@@ -127,3 +127,18 @@ ul {
 .filtered-date{
   display: block;
 } */
+
+.categoryList{
+  float:left;
+  width: 300px
+}
+.numberOfTasks{
+  float:left;
+  position: relative;
+  left: -80px;
+  bottom: -2px;
+  
+}
+.newTask{
+  clear: both;
+}

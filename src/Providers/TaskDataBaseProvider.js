@@ -1,7 +1,6 @@
 import { render } from "@testing-library/react";
 import React, { Component } from 'react'
 import _ from 'lodash';
-import isEqual from 'lodash/isEqual';
 
 
 export default class TaskDataBaseProvider extends Component {
@@ -25,20 +24,11 @@ export default class TaskDataBaseProvider extends Component {
 
 
     getCategories() {
-        const result = [...this.tasks.reduce((acc, current) => {
-            if (!acc.has(current.id)) acc.set(current.id, { ...current, count: 0 });
-            acc.get(current.id).count++;
-            return acc;
-        }, new Map).values()];
-
         const category = [...new Set(this.categories.map(item => {
             return item;
         }))]
 
-        
-        const categoryWithCountOfTask = [...category, ...result]
-        console.log(categoryWithCountOfTask)
-        return categoryWithCountOfTask
+        return category
     }
 
     saveCategory(category) {
@@ -103,12 +93,18 @@ export default class TaskDataBaseProvider extends Component {
 
     }
 
-//     countingTasks() {
-       
-             
-//   return result
+    // counting tasks for each category 
+    countingTasks() {
+        const result = [...this.tasks.reduce((acc, current) => {
+            if (!acc.has(current.id)) acc.set(current.id, { ...current, count: 0 });
+            acc.get(current.id).count++;
+            return acc;
+        }, new Map).values()];
 
-//     }
+
+        return result
+
+    }
 
     render() {
         return (<div>

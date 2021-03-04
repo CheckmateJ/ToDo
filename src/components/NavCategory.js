@@ -8,7 +8,7 @@ export default class NavCategory extends Component {
     constructor(props) {
         super(props);
         this.categoryProvider = new TaskDataBaseProvider();
-        this.state = { CategoryId: '' }
+        this.state = { CategoryId: '', count: this.categoryProvider.countingTasks() }
     }
     setCategory = (category) => {
         this.setState({
@@ -25,37 +25,21 @@ export default class NavCategory extends Component {
         this.categoryProvider.setUpdateCategory(text, id);
     }
 
-    // count = () =>{
-
-    // //   for (const id of this.state.count) {
-    // //       return id
-    // //   }
-    //     this.state.count.map(el => { return el  })
-    //     for (var i = 0; i < this.state.count.length; i++) {
-    //         return this.state.count[i]
-
-    //     }
-
-    // }
-
-
-
-
 
 
 
     render() {
-        console.log(this.props.categories)
         return (
             <div>
-                 
-                {this.props.categories.map(category => <ul> <Link to={`/category/${category.id}`} onClick={() => this.setCategory(category)}>
-                    <input type="text" id={category.id} defaultValue={category.category} onChange={(e) => { this.setUpdateCategory(e.target.value, category.id) }} />
-                    
-                </Link>
-                {category.count}
-                    <button onClick={this.deleteCategory.bind(this, category.id)}>Delete</button></ul>)}
-               
+                <div className="categoryList">
+                    {this.props.categories.map(category => <ul> <Link to={`/category/${category.id}`} onClick={() => this.setCategory(category)}>
+                        <input type="text" id={category.id} defaultValue={category.category} onChange={(e) => { this.setUpdateCategory(e.target.value, category.id) }} />
+                    </Link>
+                        <button onClick={this.deleteCategory.bind(this, category.id)}>Delete</button></ul>)}
+                </div>
+                <div className="numberOfTasks">
+                    {this.state.count.map(el => <ul>{el.count}</ul>)}
+                </div>
                 <TodoList catId={this.state.CategoryId} />
 
 

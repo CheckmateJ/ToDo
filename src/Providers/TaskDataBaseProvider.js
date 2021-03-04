@@ -25,9 +25,20 @@ export default class TaskDataBaseProvider extends Component {
 
 
     getCategories() {
-        return [...new Set(this.categories.map(item => {
+        const result = [...this.tasks.reduce((acc, current) => {
+            if (!acc.has(current.id)) acc.set(current.id, { ...current, count: 0 });
+            acc.get(current.id).count++;
+            return acc;
+        }, new Map).values()];
+
+        const category = [...new Set(this.categories.map(item => {
             return item;
         }))]
+
+        
+        const categoryWithCountOfTask = [...category, ...result]
+        console.log(categoryWithCountOfTask)
+        return categoryWithCountOfTask
     }
 
     saveCategory(category) {
@@ -92,18 +103,12 @@ export default class TaskDataBaseProvider extends Component {
 
     }
 
-    countingTasks() {
-    
-        const result = [...this.tasks.reduce((acc, current) => {
-            if (!acc.has(current.id)) acc.set(current.id, { ...current, count: 0 });
-            acc.get(current.id).count++;
-            return acc;
-        }, new Map).values()];
+//     countingTasks() {
+       
+             
+//   return result
 
-        console.log(result);
-
-    }
-
+//     }
 
     render() {
         return (<div>

@@ -52,8 +52,10 @@ export default class TaskDataBaseProvider extends Component {
     // delete category
     deleteCategory(id) {
         this.LoadData();
-        const filtered = this.categories.filter(cat => cat.id !== id);
-        localStorage.setItem('props.state.categories', JSON.stringify(filtered))
+        const filteredCategory = this.categories.filter(cat => cat.id !== id);
+        const filteredTask = this.tasks.filter(task => task.id !== id);
+        localStorage.setItem('props.state.categories', JSON.stringify(filteredCategory))
+        localStorage.setItem('props.state.tasks', JSON.stringify(filteredTask))
         window.location.reload();
     }
 

@@ -20,6 +20,7 @@ export default class TaskDataBaseProvider extends Component {
         if (!this.tasks || !this.tasks.map) {
             this.tasks = [];
         }
+
     }
 
 
@@ -47,9 +48,7 @@ export default class TaskDataBaseProvider extends Component {
         localStorage.setItem('props.state.tasks', JSON.stringify(this.tasks))
     }
 
-
-
-    // delete category
+    // delete category and tasks which are contains there
     deleteCategory(id) {
         this.LoadData();
         const filteredCategory = this.categories.filter(cat => cat.id !== id);
@@ -82,13 +81,16 @@ export default class TaskDataBaseProvider extends Component {
     }
 
     // edit existing task
-    setUpdateTask(text, id) {
+    setUpdateTask(text, id, checkBoxId, check) {
         const tasks = this.tasks;
         tasks.map(task => {
-            if (task.id === id) {
+            if (task.id === id && checkBoxId === task.checkId) {
+                task.check = text
+            } else if (task.id === id) {
                 task.task = text
             }
         })
+        console.log(tasks)
         this.setState({
             tasks: localStorage.setItem('props.state.tasks', JSON.stringify(this.tasks))
         })

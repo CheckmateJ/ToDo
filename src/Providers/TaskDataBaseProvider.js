@@ -7,7 +7,6 @@ export default class TaskDataBaseProvider extends Component {
     constructor(props) {
         super(props);
         this.LoadData();
-
     }
 
     LoadData() {
@@ -81,12 +80,13 @@ export default class TaskDataBaseProvider extends Component {
     }
 
     // edit existing task
-    setUpdateTask(text, id, checkBoxId, check) {
+    setUpdateTask(text, id, checkBoxId) {
         const tasks = this.tasks;
         tasks.map(task => {
             if (task.id === id && checkBoxId === task.checkId) {
-                task.check = text
-            } else if (task.id === id) {
+                task.check = text;
+                window.location.reload();
+            } else if (task.checkId === id) {
                 task.task = text
             }
         })
@@ -110,7 +110,7 @@ export default class TaskDataBaseProvider extends Component {
 
     }
 
-    render() {
+    render()  { 
         return (<div>
 
         </div>)
